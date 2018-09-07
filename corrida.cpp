@@ -1,11 +1,13 @@
 #include "corrida.hpp"
 #include <iostream>
 
-JogoSapo::JogoSapo(int distancia) {
+JogoSapo::JogoSapo(int distancia) {	
 	m_distancia = distancia;
+	m_rodada = 0;
 }
 JogoSapo::~JogoSapo() {
-
+	m_distancia = 50;
+	m_rodada = 0;	
 }
 
 void JogoSapo::addSapo(Sapo *jogador) {
@@ -14,12 +16,20 @@ void JogoSapo::addSapo(Sapo *jogador) {
 	}	
 }
 
-void JogoSapo::run() {
-
+void JogoSapo::run() {	
+	while (m_vencedor == nullptr) {
+		for (int i = 0; i < m_total_jogadores; i++) {
+			m_jogadores[i]->pular();
+			if (m_jogadores[i]->getDistanciaPercorrida() >= m_distancia) {
+				m_vencedor = m_jogadores[i];
+			}
+		}
+	}
+	printVencedor();
 }
 
 int JogoSapo::getDistancia() {
-	return 1;
+	return m_distancia;
 }
 
 Sapo * JogoSapo::getVencedor() {
@@ -27,11 +37,12 @@ Sapo * JogoSapo::getVencedor() {
 }
 
 int JogoSapo::getRodada() {
-	return 1;
+	return m_rodada;
 }
 
 void JogoSapo::printVencedor() {
-	for (int i = 0; i < m_total_jogadores; i++) {
-		std::cout << m_jogadores[i]->getId() << std::endl;
-	}
+	std::cout << m_vencedor->getId() << std::endl;
+	// for (int i = 0; i < m_total_jogadores; i++) {
+	// 	std::cout << m_jogadores[i]->getId() << std::endl;
+	// }
 }

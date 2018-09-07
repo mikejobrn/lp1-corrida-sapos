@@ -14,7 +14,9 @@ int main() {
 	jogoSapo->addSapo(new Sapo("Marlon", 9));
 	jogoSapo->addSapo(new Sapo("Lourdes", 11));
 
-	jogoSapo->printVencedor();
+	jogoSapo->run();
+
+	// jogoSapo->printVencedor();
 
 	return 0;
 }

@@ -3,12 +3,15 @@
 
 #include "sapo.hpp"
 
-Sapo::Sapo(std::string identificador, int distancia_maxima_salto) {
+Sapo::Sapo(std::string identificador, int distancia_maxima_salto)
+{
 	m_identificador = identificador;	
 	m_distancia_maxima_salto = distancia_maxima_salto;
 
 	m_distancia_percorrida = 0;
 	m_qtd_pulos_dados = 0;
+
+	random_engine = std::default_random_engine(random_device());
 
 	uniform_distribution = std::uniform_int_distribution<>(1, distancia_maxima_salto);
 }
@@ -27,7 +30,8 @@ int Sapo::getQtdPulosDados() {
 
 void Sapo::pular() {
 	int pulo = std::round(uniform_distribution(random_engine));
-	m_qtd_pulos_dados += pulo;
+	m_distancia_percorrida += pulo;
+	m_qtd_pulos_dados++;
 }
 
 void Sapo::print() {

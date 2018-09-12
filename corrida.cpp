@@ -41,7 +41,8 @@ int JogoSapo::getRodada() {
 }
 
 void JogoSapo::printVencedor() {
-	std::cout << m_vencedor->getId() << std::endl;
+	std::cout << *m_vencedor;
+	// std::cout << m_vencedor->getId() << std::endl;
 	// for (int i = 0; i < m_total_jogadores; i++) {
 	// 	std::cout << m_jogadores[i]->getId() << std::endl;
 	// }

@@ -1,5 +1,6 @@
 #include <random>
 #include <iostream>
+#include <ostream>
 
 #include "sapo.hpp"
 
@@ -14,6 +15,19 @@ Sapo::Sapo(std::string identificador, int distancia_maxima_salto)
 	random_engine = std::default_random_engine(random_device());
 
 	uniform_distribution = std::uniform_int_distribution<>(1, distancia_maxima_salto);
+}
+
+Sapo::Sapo(Sapo &s) {
+	m_identificador = s.m_identificador;
+	m_distancia_maxima_salto = s.m_distancia_maxima_salto;
+	m_distancia_percorrida = s.m_distancia_percorrida;
+	m_qtd_pulos_dados = s.m_qtd_pulos_dados;
+	random_engine = s.random_engine;
+	uniform_distribution = s.uniform_distribution;
+}
+
+Sapo::~Sapo() {
+	
 }
 
 std::string Sapo::getId() {
@@ -36,4 +50,9 @@ void Sapo::pular() {
 
 void Sapo::print() {
 	std::cout << "O sapo " << m_identificador << " saltou " << m_qtd_pulos_dados << " vezes." << std::endl;
+}
+
+std::ostream& operator<<(std::ostream &o, Sapo const s) {
+	o << "O sapo " << s.m_identificador << " saltou " << s.m_qtd_pulos_dados << " vezes." << std::endl;
+	return o;
 }

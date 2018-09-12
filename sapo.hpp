@@ -3,6 +3,7 @@
 
 #include <string>
 #include <random>
+#include <ostream>
 
 class Sapo
 {
@@ -17,6 +18,7 @@ private:
 	std::uniform_int_distribution<> uniform_distribution;
 public:
 	Sapo(std::string identificador, int distancia_maxima_salto);
+	Sapo(Sapo &s);
 	~Sapo();
 
 	std::string getId();
@@ -25,6 +27,8 @@ public:
 
 	void pular();
 	void print();
+
+	friend std::ostream& operator<<(std::ostream &o, Sapo const s);
 };
 
 #endif
